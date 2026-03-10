@@ -1,62 +1,70 @@
 # AOXCON Protocol Specifications
 
-AOXCON is a multi-chain protocol kernel specification that standardizes one interoperable system across:
+AOXCON is a full, audit-oriented protocol specification for a deterministic interoperability kernel across:
 
-- **EVM ecosystems** (Ethereum/L2/EVM chains)
-- **Move ecosystems** (Aptos/Sui-style runtimes)
-- **Cardano** (eUTxO + Plutus)
+- **EVM ecosystems**
+- **Move ecosystems**
+- **Cardano (eUTxO)**
 
-This repository is the **single normative source** for implementation repositories.
+This repository is the **single normative source of truth** for AOXCON behavior.
 
-## Repository role
+## Scope
 
-This repo defines the protocol, not production runtime code. It is authoritative for:
+This repository defines:
 
-- canonical data models,
-- deterministic state transitions,
-- verification and relaying behavior,
-- compatibility requirements across adapters,
-- security controls and audit criteria,
-- conformance suite expectations.
+- canonical protocol data models,
+- deterministic state machine and transition invariants,
+- cross-chain message envelope and verification rules,
+- adapter compatibility contract,
+- relayer operating contract,
+- security baseline and threat expectations,
+- conformance requirements and audit evidence format.
 
-## Target repositories
+## Implementation repositories
 
-- `aoxcon-core` — protocol state machine and canonical types
-- `aoxcon-evm` — EVM adapter
-- `aoxcon-move` — Move adapter
-- `aoxcon-cardano` — Cardano adapter
-- `aoxcon-relayer` — watcher, witness and submitter services
-- `aoxcon-sdk` — client SDKs and tooling
+- `aoxcon-core`
+- `aoxcon-evm`
+- `aoxcon-move`
+- `aoxcon-cardano`
+- `aoxcon-relayer`
+- `aoxcon-sdk`
 
-## Documentation index
+## Document map
 
-### Core
+### Foundation
 - [System Overview](docs/system-overview.md)
 - [Core Architecture](docs/core-architecture.md)
 - [Protocol State Machine](docs/protocol-state-machine.md)
+- [Glossary](docs/glossary.md)
 
 ### Interoperability
 - [Message Specification](docs/message-spec.md)
 - [Relayer Specification](docs/relayer-spec.md)
 - [Compatibility Contract](docs/compatibility-contract.md)
+- [Implementation Language Strategy](docs/implementation-language-strategy.md)
 
-### Security & Quality
+### Security, Audit, Quality
 - [Security Baseline](docs/security-baseline.md)
-- [Audit Conformance Checklist](docs/audit-conformance-checklist.md)
 - [Conformance Test Matrix](docs/conformance-test-matrix.md)
+- [Audit Conformance Checklist](docs/audit-conformance-checklist.md)
 
 ### Productization
 - [SDK Specification](docs/sdk-spec.md)
-- [Implementation Language Strategy](docs/implementation-language-strategy.md)
 - [Roadmap](docs/roadmap.md)
+- [Governance](docs/governance.md)
 - [Whitepaper (Markdown)](docs/whitepaper.md)
 - [Whitepaper (PDF)](docs/whitepaper.pdf)
 
-## Change governance
+## Normative language
 
-- Normative changes require pull requests.
-- Any behavioral change must declare SemVer impact.
-- Security-relevant changes must update security and conformance docs in the same PR.
+Terms **MUST**, **MUST NOT**, **SHOULD**, and **MAY** are interpreted as in RFC 2119.
+
+## Change policy
+
+- Normative changes require pull request review.
+- Every behavior change must declare SemVer impact.
+- Security-impacting changes MUST update security and conformance docs in the same change set.
+- Conformance matrix MUST be updated when new error/status behavior is introduced.
 
 ## License
 

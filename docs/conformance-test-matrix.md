@@ -1,18 +1,20 @@
 # Conformance Test Matrix
 
-| Area | Test ID | Description | Expected Result |
+| Area | ID | Scenario | Expected Code |
 |---|---|---|---|
 | Schema | CT-001 | Missing required envelope field | `ERR_INVALID_SCHEMA` |
-| Chain ID | CT-002 | Invalid `source_chain` format | `ERR_INVALID_CHAIN_ID` |
-| Replay | CT-003 | Duplicate `message_id` | `OK_ALREADY_PROCESSED` |
-| Nonce | CT-004 | Non-monotonic nonce | `ERR_INVALID_NONCE` |
-| Time | CT-005 | `now > expiry` | `ERR_EXPIRED_MESSAGE` |
-| Hash | CT-006 | Payload hash mismatch | `ERR_PROCESSING_FAILED` |
-| Proof | CT-007 | Invalid proof bytes | `ERR_INVALID_PROOF` |
-| AuthZ | CT-008 | Unauthorized actor | `ERR_UNAUTHORIZED_ACTOR` |
-| State | CT-009 | Illegal transition request | `ERR_INVALID_STATE_TRANSITION` |
-| Success | CT-010 | Fully valid message | `OK_PROCESSED` |
+| Schema | CT-002 | Wrong field type in envelope | `ERR_INVALID_SCHEMA` |
+| Chain | CT-003 | Invalid chain namespace | `ERR_INVALID_CHAIN_ID` |
+| Replay | CT-004 | Duplicate `message_id` | `OK_ALREADY_PROCESSED` |
+| Nonce | CT-005 | Non-monotonic nonce | `ERR_INVALID_NONCE` |
+| Time | CT-006 | Before `not_before` | `ERR_STALE_MESSAGE` |
+| Time | CT-007 | After `expiry` | `ERR_EXPIRED_MESSAGE` |
+| Hash | CT-008 | Payload hash mismatch | `ERR_PROCESSING_FAILED` |
+| Proof | CT-009 | Invalid proof | `ERR_INVALID_PROOF` |
+| AuthZ | CT-010 | Unauthorized actor | `ERR_UNAUTHORIZED_ACTOR` |
+| State | CT-011 | Illegal transition | `ERR_INVALID_STATE_TRANSITION` |
+| Success | CT-012 | Fully valid message | `OK_PROCESSED` |
 
-## Cross-adapter requirement
+## Cross-repo requirement
 
-All adapter repositories MUST pass all matrix cases with canonical-equivalent outputs.
+All adapters MUST pass the full matrix with canonical-equivalent outcomes.

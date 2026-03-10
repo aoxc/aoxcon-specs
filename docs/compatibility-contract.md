@@ -1,8 +1,8 @@
 # Compatibility Contract (Normative)
 
-## 1. Required adapter interface
+## 1. Required interfaces
 
-Each adapter MUST provide equivalent operations:
+Every adapter MUST expose canonical-equivalent operations:
 
 - `protocolVersion() -> string`
 - `domainSeparator() -> bytes32`
@@ -10,27 +10,34 @@ Each adapter MUST provide equivalent operations:
 - `isProcessed(message_id) -> bool`
 - `latestNonce(actor_id) -> uint64`
 
-## 2. Required canonical events
+## 2. Required events
 
 - `MessageQueued(message_id, source_chain, target_chain, actor_id)`
 - `MessageVerified(message_id, verifier, proof_type)`
 - `MessageProcessed(message_id, status_code, state_from, state_to)`
 
-## 3. Behavior compatibility
+## 3. Behavioral equivalence
 
-For equivalent canonical input tuples, adapters MUST return equivalent canonical outcomes.
+For the same canonical input tuple `(envelope, payload, proof, current_state)`, all adapters MUST produce equivalent:
 
-## 4. Version policy
+- status code,
+- state transition,
+- idempotency decision,
+- emitted semantic event set.
 
-- Major mismatch is incompatible.
-- Minor upgrades MUST be backward compatible.
-- Patch upgrades MUST preserve behavior.
+## 4. Error/status compatibility
 
-## 5. Conformance declaration
+Internal runtime errors MUST map to canonical AOXCON result codes from `message-spec.md`.
 
-Every implementation repository MUST publish:
+## 5. Version compatibility
 
-- implemented spec version,
-- conformance report,
-- deviations list (if any),
+- major mismatch => incompatible,
+- minor upgrade => backward-compatible only,
+- patch update => no behavior change.
+
+## 6. Mandatory publication in each implementation repo
+
+- supported spec version,
+- conformance test report,
+- known deviations,
 - migration notes.
