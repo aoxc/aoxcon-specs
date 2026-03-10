@@ -1,0 +1,77 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2958 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 50 760 Tm (AOXCON PROTOCOL WHITEPAPER) Tj
+1 0 0 1 50 745 Tm () Tj
+1 0 0 1 50 730 Tm (ABSTRACT) Tj
+1 0 0 1 50 715 Tm () Tj
+1 0 0 1 50 700 Tm (AOXCON defines a chain-agnostic interoperability core for EVM, Move and Cardano environments. The protocol standardizes message identity, verification and deterministic state transitions so independent adapter implementations remain behaviorally equivalent.) Tj
+1 0 0 1 50 685 Tm () Tj
+1 0 0 1 50 670 Tm (PROBLEM STATEMENT) Tj
+1 0 0 1 50 655 Tm () Tj
+1 0 0 1 50 640 Tm (Cross-chain systems often fail at interoperability due to inconsistent message semantics, incompatible error handling, and chain-specific behavior drift. AOXCON addresses this by separating domain logic from runtime-specific adapter details.) Tj
+1 0 0 1 50 625 Tm () Tj
+1 0 0 1 50 610 Tm (DESIGN GOALS) Tj
+1 0 0 1 50 595 Tm () Tj
+1 0 0 1 50 580 Tm (1. Deterministic outcomes across chains.) Tj
+1 0 0 1 50 565 Tm (2. Explicit compatibility contract for all adapter repos.) Tj
+1 0 0 1 50 550 Tm (3. Security-first message processing with replay resistance.) Tj
+1 0 0 1 50 535 Tm (4. Audit-friendly traceability from spec to implementation.) Tj
+1 0 0 1 50 520 Tm () Tj
+1 0 0 1 50 505 Tm (PROTOCOL MODEL) Tj
+1 0 0 1 50 490 Tm () Tj
+1 0 0 1 50 475 Tm (AOXCON processing is driven by a canonical envelope and deterministic transition function:) Tj
+1 0 0 1 50 460 Tm () Tj
+1 0 0 1 50 445 Tm (`Result = f\(envelope, payload, proof, current_state\)`) Tj
+1 0 0 1 50 430 Tm () Tj
+1 0 0 1 50 415 Tm (where `f` must be behaviorally equivalent in all conforming implementations.) Tj
+1 0 0 1 50 400 Tm () Tj
+1 0 0 1 50 385 Tm (COMPATIBILITY AND GOVERNANCE) Tj
+1 0 0 1 50 370 Tm () Tj
+1 0 0 1 50 355 Tm (The compatibility contract defines required interfaces, events, and SemVer-based compatibility policy. Breaking behavior is only allowed in major versions. Minor and patch updates preserve normative semantics.) Tj
+1 0 0 1 50 340 Tm () Tj
+1 0 0 1 50 325 Tm (SECURITY MODEL) Tj
+1 0 0 1 50 310 Tm () Tj
+1 0 0 1 50 295 Tm (Security controls include nonce+message replay prevention, proof verification, authorization boundaries, bounded processing limits and emergency controls. Audit readiness requires testable evidence and documented assumptions.) Tj
+1 0 0 1 50 280 Tm () Tj
+1 0 0 1 50 265 Tm (DEPLOYMENT MODEL) Tj
+1 0 0 1 50 250 Tm () Tj
+1 0 0 1 50 235 Tm (- `aoxcon-core`: normative logic reference.) Tj
+1 0 0 1 50 220 Tm (- `aoxcon-evm` / `aoxcon-move` / `aoxcon-cardano`: chain adapters.) Tj
+1 0 0 1 50 205 Tm (- `aoxcon-relayer`: event witness and submission path.) Tj
+1 0 0 1 50 190 Tm (- `aoxcon-sdk`: developer interface across environments.) Tj
+1 0 0 1 50 175 Tm () Tj
+1 0 0 1 50 160 Tm (CONCLUSION) Tj
+1 0 0 1 50 145 Tm () Tj
+1 0 0 1 50 130 Tm (AOXCON provides the protocol kernel needed to build a fully aligned multi-chain system across EVM, Move and Cardano, while preserving determinism, compatibility and auditability.) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3321
+%%EOF
