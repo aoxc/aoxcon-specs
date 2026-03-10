@@ -47,6 +47,7 @@ This repo defines the protocol, not production runtime code. It is authoritative
 
 ### Productization
 - [SDK Specification](docs/sdk-spec.md)
+- [Implementation Language Strategy](docs/implementation-language-strategy.md)
 - [Roadmap](docs/roadmap.md)
 - [Whitepaper (Markdown)](docs/whitepaper.md)
 - [Whitepaper (PDF)](docs/whitepaper.pdf)
