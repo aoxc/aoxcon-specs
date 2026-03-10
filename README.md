@@ -55,6 +55,17 @@ This repository defines:
 - [Whitepaper (Markdown)](docs/whitepaper.md)
 - [Whitepaper (PDF)](docs/whitepaper.pdf)
 
+
+## Reference implementation (code)
+
+This repository now includes a minimal executable reference implementation under `src/aoxcon_ref/` with deterministic envelope processing and state transitions, plus tests under `tests/`.
+
+Run locally:
+
+```bash
+PYTHONPATH=src python -m unittest -v
+```
+
 ## Normative language
 
 Terms **MUST**, **MUST NOT**, **SHOULD**, and **MAY** are interpreted as in RFC 2119.
