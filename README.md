@@ -1,35 +1,48 @@
-# AOXCON Protocol Specifications
+# AOXCON — Multi-Repo Interop Program (EVM + Move + Cardano)
 
-AOXCON is a full, audit-oriented protocol specification for a deterministic interoperability kernel across:
+AOXCON, çok-zincirli sistemlerde **tek protokol davranışı** sağlayan deterministik bir birlikte çalışabilirlik (interoperability) çekirdeğidir.
 
-- **EVM ecosystems**
-- **Move ecosystems**
-- **Cardano (eUTxO)**
+Bu depo bir uygulama reposu değil; tüm alt depoların aynı kurallarla ilerlemesini sağlayan **normatif spesifikasyon ve referans davranış** kaynağıdır.
 
-This repository is the **single normative source of truth** for AOXCON behavior.
+## Program vizyonu
 
-## Scope
+AOXCON ile hedeflenen model:
 
-This repository defines:
+- 3 ayrı dApp (her biri DAO mantığıyla),
+- 1 merkezi olmayan yönetim/orchestration deposu (CLI + panel + relayer control plane),
+- zincir fark etmeksizin aynı envelope, aynı hata kodu, aynı geçiş semantiği.
 
-- canonical protocol data models,
-- deterministic state machine and transition invariants,
-- cross-chain message envelope and verification rules,
+Detaylı hedef topoloji: [Program Topology](docs/portfolio-topology.md).
+
+## Ekosistem yapısı (önerilen)
+
+### dApp katmanı (3 depo)
+
+1. `aoxcon-evm` — EVM DAO dApp
+2. `aoxcon-move` — Move DAO dApp
+3. `aoxcon-cardano` — Cardano/Plutus DAO dApp
+
+### Yönetim katmanı (4. depo)
+
+4. `aoxcon-control` — AOXCON yönetim deposu
+   - CLI
+   - Operasyon paneli
+   - Relayer orchestrator
+   - Governance bridge
+
+> Amaç: Her proje DAO gibi çalışırken, AOXCON protokolü bunların arası iletişimi deterministik ve denetlenebilir şekilde standardize eder.
+
+## Bu depoda ne var?
+
+- canonical protocol data modelleri,
+- deterministic state machine kuralları,
+- cross-chain envelope doğrulama sözleşmesi,
 - adapter compatibility contract,
-- relayer operating contract,
-- security baseline and threat expectations,
-- conformance requirements and audit evidence format.
+- relayer davranış sözleşmesi,
+- security baseline + audit checklist,
+- conformance matrix.
 
-## Implementation repositories
-
-- `aoxcon-core`
-- `aoxcon-evm`
-- `aoxcon-move`
-- `aoxcon-cardano`
-- `aoxcon-relayer`
-- `aoxcon-sdk`
-
-## Document map
+## Doküman haritası
 
 ### Foundation
 - [System Overview](docs/system-overview.md)
@@ -42,8 +55,10 @@ This repository defines:
 - [Relayer Specification](docs/relayer-spec.md)
 - [Compatibility Contract](docs/compatibility-contract.md)
 - [Implementation Language Strategy](docs/implementation-language-strategy.md)
+- [Cardano Haskell Integration Blueprint](docs/cardano-haskell-reference.md)
+- [Program Topology (3 dApp + 1 control repo)](docs/portfolio-topology.md)
 
-### Security, Audit, Quality
+### Security / Audit / Quality
 - [Security Baseline](docs/security-baseline.md)
 - [Conformance Test Matrix](docs/conformance-test-matrix.md)
 - [Audit Conformance Checklist](docs/audit-conformance-checklist.md)
@@ -55,100 +70,49 @@ This repository defines:
 - [Whitepaper (Markdown)](docs/whitepaper.md)
 - [Whitepaper (PDF)](docs/whitepaper.pdf)
 
+## Referans implementasyonlar
 
-## Reference implementation (code)
+### Python deterministic kernel
 
-This repository now includes a minimal executable reference implementation under `src/aoxcon_ref/` with deterministic envelope processing and state transitions, plus tests under `tests/`.
-
-Run locally:
+- `src/aoxcon_ref/` (envelope + state machine)
+- `tests/` (protokol davranış testleri)
 
 ```bash
-PYTHONPATH=src python -m unittest -v
+PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-## Normative language
+### Haskell / Cardano uyumluluk referansı
 
-Terms **MUST**, **MUST NOT**, **SHOULD**, and **MAY** are interpreted as in RFC 2119.
+- `haskell/aoxcon-cardano-ref/src/Aoxcon/Envelope.hs`
+- `haskell/aoxcon-cardano-ref/src/Aoxcon/StateMachine.hs`
+- `haskell/aoxcon-cardano-ref/src/Aoxcon/FNTTreasury.hs`
+- `haskell/aoxcon-cardano-ref/test/Spec.hs`
 
-## Change policy
+```bash
+cd haskell/aoxcon-cardano-ref
+cabal test
+```
 
-- Normative changes require pull request review.
-- Every behavior change must declare SemVer impact.
-- Security-impacting changes MUST update security and conformance docs in the same change set.
-- Conformance matrix MUST be updated when new error/status behavior is introduced.
+## Üretime uygunluk prensibi
 
-## License
+Bir depo AOXCON uyumlu sayılmak için minimumda şunları sağlamalıdır:
 
-See [LICENSE](LICENSE).
-=======
-# AOXCON Specs
+1. Canonical error/status kodlarını bozmaz.
+2. Replay/nonce/idempotency kurallarını birebir uygular.
+3. Conformance vektörlerini geçirir.
+4. Audit evidence üretir (sürüm bazlı).
+5. Security baseline kontrollerini CI politikası haline getirir.
 
-AOXCON; **EVM, Move ve Cardano** ekosistemleriyle yerel uyumlu çalışan, çok-zincirli bir çekirdek protokol ve geliştirici standardı tanımıdır.
+## Normatif dil
 
-Bu repo, uygulama kodu değil; farklı depoların aynı kurallarla ilerlemesini sağlayan **spesifikasyon kaynağıdır**.
+**MUST**, **MUST NOT**, **SHOULD**, **MAY** terimleri RFC 2119 anlamıyla kullanılır.
 
-## Vizyon
+## Değişiklik politikası
 
-- EVM ağları (Ethereum, L2'ler, EVM sidechain'ler),
-- Move tabanlı ağlar (Aptos/Sui benzeri modeller),
-- Cardano ekosistemi (eUTxO + Plutus yaklaşımı)
+- Normatif değişiklikler PR review gerektirir.
+- Her davranış değişikliği SemVer etkisi belirtir.
+- Güvenlik etkili değişiklikler aynı değişim setinde security + conformance dokümanlarını günceller.
 
-için tek bir çekirdek domain modeli, ortak mesaj formatı, güvenlik prensipleri ve entegrasyon sözleşmeleri tanımlamak.
+## Lisans
 
-## Kapsam
-
-AOXCON çekirdeği aşağıdaki depolar için “tek doğruluk kaynağı” olacak şekilde tasarlanır:
-
-1. `aoxcon-core` → Domain modelleri ve protokol kuralları
-2. `aoxcon-evm` → Solidity/EVM adaptörü
-3. `aoxcon-move` → Move adaptörü
-4. `aoxcon-cardano` → Plutus/Cardano adaptörü
-5. `aoxcon-relayer` → Zincirler arası mesaj taşıma ve doğrulama katmanı
-6. `aoxcon-sdk` → TypeScript/Rust SDK
-
-> Bu repo, yukarıdaki tüm depoların referans aldığı teknik spesifikasyonları içerir.
-
-## Çekirdek Tasarım İlkeleri
-
-1. **Chain-agnostic Domain Core**
-   - İş kuralları zincirden bağımsız tanımlanır.
-   - Zincire özgü farklılıklar adaptör katmanına taşınır.
-
-2. **Deterministik Mesajlaşma**
-   - Zincirler arası mesajlar tek tip envelope ile tanımlanır.
-   - Idempotent işleme ve replay koruması zorunludur.
-
-3. **Doğrulanabilir Durum Geçişi**
-   - Her kritik aksiyon için doğrulanabilir event/state delili üretilir.
-   - Off-chain relayer davranışı denetlenebilir olmalıdır.
-
-4. **Güvenlik Önceliği**
-   - Yetki modeli, nonce yönetimi, imza doğrulama ve zaman pencereleri standarttır.
-   - Zincir-özel güvenlik açıklarına karşı ayrı kontrol listesi bulunur.
-
-5. **Sürüm Uyumluluğu**
-   - SemVer ile sürümlenir.
-   - Geriye dönük uyumluluk kuralları net tanımlanır.
-
-## Doküman Haritası
-
-- [Core Architecture](docs/core-architecture.md)
-- [Cross-Chain Message Spec](docs/message-spec.md)
-- [Compatibility Contract](docs/compatibility-contract.md)
-- [Security Baseline](docs/security-baseline.md)
-- [Roadmap](docs/roadmap.md)
-
-## Hızlı Başlangıç
-
-Yeni bir repo AOXCON uyumlu sayılması için:
-
-1. `compatibility-contract.md` içindeki zorunlu interface ve event adlarını birebir uygulayın.
-2. `message-spec.md` formatında mesaj üretip doğrulayın.
-3. `security-baseline.md` maddelerinden kritik olanları CI'da test edin.
-4. Bu repodaki sürüm numarasını bağımlılık metadata’sında belirtin.
-
-## Katkı
-
-- Değişiklikler PR ile yapılır.
-- Her değişiklikte sürüm etkisi (`major`, `minor`, `patch`) açıklanır.
-- Zincir-özel öneriler genel çekirdeği bozmayacak şekilde eklenir.
+[Lisans](LICENSE)

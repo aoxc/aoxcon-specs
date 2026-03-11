@@ -47,3 +47,24 @@ Conformance is measured by shared matrix-driven test vectors and mandatory publi
 ## Conclusion
 
 AOXCON is designed to be the protocol kernel for fully aligned EVM + Move + Cardano interoperability with audit-grade guarantees.
+
+
+## Program-level deployment model (3 dApp + 1 control)
+
+AOXCON program hedefinde 4 repo topolojisi bulunur:
+
+1. EVM DAO dApp,
+2. Move DAO dApp,
+3. Cardano/Plutus DAO dApp,
+4. AOXCON control repo (CLI + orchestration + governance bridge).
+
+Bu modelde her dApp yerel DAO olarak özerktir; zincirler arası karar/mesaj aktarımı AOXCON canonical envelope ile normalize edilir.
+
+## DAO interoperability thesis
+
+Her bir proje DAO gibi yönetilebilir. AOXCON bu yapıda:
+
+- governance kararlarını denetlenebilir zarf (envelope) biçiminde taşır,
+- zincirler arası karar tutarlılığını korur,
+- relayer katmanında retry/idempotency güvence altına alır,
+- audit izini tüm zincirlerde eşlenebilir tutar.

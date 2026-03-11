@@ -24,6 +24,8 @@ Reason: EVM, Move and Cardano are runtime-specific ecosystems with different sma
 - **Aiken** or **Plutus (Haskell)**
 - Purpose: on-chain adapter for Cardano eUTxO model.
 
+Reference package in this repository: `haskell/aoxcon-cardano-ref` (conformance-oriented skeleton for envelope/state machine/FNT treasury behavior).
+
 ### `aoxcon-relayer`
 - **Rust** (primary)
 - Purpose: performance, reliability, safe concurrency, long-running daemon operations.

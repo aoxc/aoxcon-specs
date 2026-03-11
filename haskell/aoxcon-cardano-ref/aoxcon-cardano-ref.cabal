@@ -1,0 +1,44 @@
+cabal-version:      3.8
+name:               aoxcon-cardano-ref
+version:            0.1.0.0
+build-type:         Simple
+
+library
+  hs-source-dirs:   src
+  exposed-modules:
+      Aoxcon.Errors
+    , Aoxcon.Types
+    , Aoxcon.StateMachine
+    , Aoxcon.Envelope
+    , Aoxcon.FNTTreasury
+  build-depends:
+      base >=4.16 && <5
+    , containers
+    , text
+    , bytestring
+    , cryptonite
+  default-language: Haskell2010
+
+executable aoxcon-cardano-ref-exe
+  hs-source-dirs:   app
+  main-is:          Main.hs
+  build-depends:
+      base >=4.16 && <5
+    , text
+    , bytestring
+    , containers
+    , aoxcon-cardano-ref
+  default-language: Haskell2010
+
+test-suite aoxcon-cardano-ref-test
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Spec.hs
+  build-depends:
+      base >=4.16 && <5
+    , text
+    , bytestring
+    , containers
+    , HUnit
+    , aoxcon-cardano-ref
+  default-language: Haskell2010
