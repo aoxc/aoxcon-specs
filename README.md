@@ -39,6 +39,23 @@ Detaylı hedef topoloji: [Program Topology](docs/portfolio-topology.md).
 
 > Amaç: Her proje DAO gibi çalışırken, AOXCON protokolü bunların arası iletişimi deterministik ve denetlenebilir şekilde standardize eder.
 
+
+## AOXCHAIN + AOXCON tam uyumlu depo yapılandırması
+
+Bu repo artık `config/aoxcon-chain-profile.json` ile zincir rolünü açıkça tanımlar:
+
+- canonical zincir deposu: `https://github.com/aoxc/aoxchain`
+- protokol uyumluluk deposu: `https://github.com/aoxc/aoxcon`
+- Cardano/Plutus hedefleri için development/staging/production zincir kimlikleri
+
+Profil doğrulaması için:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+`tests/test_profile.py` bu profilin AOXCON sözleşme kurallarına bağlı kaldığını kontrol eder.
+
 ## Bu depoda ne var?
 
 - canonical protocol data modelleri,
