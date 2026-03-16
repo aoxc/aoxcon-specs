@@ -1,0 +1,50 @@
+{
+  "profile": "aoxchain-plutus",
+  "version": 1,
+  "repository": {
+    "role": "chain-contract",
+    "chain_family": "cardano",
+    "stack": "plutus",
+    "canonical_repo": "https://github.com/aoxc/aoxchain",
+    "compatibility_repo": "https://github.com/aoxc/aoxcon"
+  },
+  "compatibility": {
+    "protocol": "AOXCON",
+    "envelope_version": "1.0.0",
+    "state_machine": "v1",
+    "required_error_codes": [
+      "OK_PROCESSED",
+      "OK_ALREADY_PROCESSED",
+      "ERR_INVALID_SCHEMA",
+      "ERR_INVALID_CHAIN_ID",
+      "ERR_INVALID_NONCE",
+      "ERR_STALE_MESSAGE",
+      "ERR_EXPIRED_MESSAGE",
+      "ERR_INVALID_PROOF",
+      "ERR_UNAUTHORIZED_ACTOR",
+      "ERR_INVALID_STATE_TRANSITION"
+    ]
+  },
+  "environments": {
+    "development": {
+      "network": "preprod",
+      "target_chain_id": "cardano:preprod",
+      "relayer_mode": "simulation"
+    },
+    "staging": {
+      "network": "preview",
+      "target_chain_id": "cardano:preview",
+      "relayer_mode": "deterministic"
+    },
+    "production": {
+      "network": "mainnet",
+      "target_chain_id": "cardano:mainnet",
+      "relayer_mode": "deterministic"
+    }
+  },
+  "aoxcon_control_plane": {
+    "governance": "required",
+    "relayer_adapter": "aoxcon/v1/cardano-plutus",
+    "proof_modes": ["merkle", "sigset", "lightclient"]
+  }
+}
